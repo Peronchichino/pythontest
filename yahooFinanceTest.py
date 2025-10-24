@@ -1,8 +1,17 @@
 import yfinance as yf
+import matplotlib.pyplot as plt
 
-msft = yf.Ticker("MSFT")
+ticker = "MSFT"
 
-msft_balance = msft.get_balance_sheet()
+data = yf.download(ticker, period="5d")
 
-#print(msft)
-print(msft_balance)
+print(data.head())
+
+plt.figure(figsize=(10,5))
+plt.plot(data.index, data["Close"], label=["Close Price"])
+plt.title(f"{ticker} Stoc price (Last month)")
+plt.xlabel("Time")
+plt.ylabel("Price(USD)")
+plt.legend()
+plt.grid(True)
+plt.show()
